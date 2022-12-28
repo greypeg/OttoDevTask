@@ -26,7 +26,7 @@ query issues {
 `;
 
 export default function List({ }: Props) {
-    const { data, loading, error } = useQuery(QUERY);
+   /* const { data, loading, error } = useQuery(QUERY);
 
     if (loading) {
         return <h2>Loading...</h2>;
@@ -36,7 +36,7 @@ export default function List({ }: Props) {
         console.error(error);
         return null;
     }
-    console.log(data)
+    console.log(data)*/
     return (
         <ListItem
       artwork={props => <Check {...props} />}

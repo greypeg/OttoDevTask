@@ -1,5 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-const token = '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'
+
+const token = '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'
+
 const client = new ApolloClient({
     uri: "https://api.github.com/graphql",
     headers: {
