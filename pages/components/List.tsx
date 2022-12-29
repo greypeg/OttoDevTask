@@ -6,9 +6,8 @@ import {
     ListItemLabel,
     SHAPE
 } from "baseui/list";
-import { Check } from "baseui/icon";
 import { Button } from "baseui/button";
-import { Pagination } from "baseui/pagination";
+
 type Props = {
     status?: boolean,
 }
