@@ -1,8 +1,37 @@
 import React from 'react'
 import ReactEchart from 'echarts-for-react';
+import { useQuery, gql } from "@apollo/client";
 type Props = {}
 
 export default function Pie({ }: Props) {
+    const QUERY = gql`
+   query pie {
+        repository(owner: "Automattic", name: "mongoose") {
+          labels(last: 6) {
+            nodes {
+              id
+              name
+              color
+              issues {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+`;
+const { data, loading, error  } = useQuery(QUERY);
+if (loading) {
+    return <h2>Loading...</h2>;
+}
+
+if (error) {
+    console.error(error);
+    return null;
+}
+//const array = data.repository.labels.nodes.map((item:any)=>{return {value:item.issues.totalCount, name:item.name}})
+    const array = data.repository.labels.nodes.map((item:any)=>{return {value:item.issues.totalCount, name:item.name}})
+    console.log(array)
     const eChartsOption = {
         tooltip: {
             trigger: 'item'
@@ -37,14 +66,7 @@ export default function Pie({ }: Props) {
                 labelLine: {
                     show: false
                 },
-                data: [
-                    { value: 1048, name: 'bug', },
-                    { value: 735, name: 'duplicate' },
-                    { value: 580, name: 'help wanted' },
-                    { value: 484, name: 'enchancement' },
-                    { value: 300, name: 'invalid' },
-                    { value: 300, name: 'question' }
-                ]
+                data: array
             }
         ]
 

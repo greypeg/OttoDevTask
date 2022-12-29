@@ -24,12 +24,19 @@ export default function List({ status }: Props) {
     const QUERY = gql`
 query fetchBasedOnState($option: IssueState!) { 
     repository(owner: "Automattic", name: "mongoose") {
-      issues(first: 10, states: [$option]) {
+      issues(first: 10, states: [$option], labels:["enhancement","question","duplicate","help wanted","invalid","bug"]) {
         totalCount
         nodes {
           id
           title
           publishedAt
+          labels(last: 10) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
         }
         pageInfo {
           endCursor
@@ -52,7 +59,6 @@ query fetchBasedOnState($option: IssueState!) {
         console.error(error);
         return null;
     }
-    console.log(data.repository.issues.nodes)
     return (
         <>
             <div className='grid grid-cols-2 gap-0.5'>
