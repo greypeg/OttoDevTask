@@ -18,7 +18,7 @@ export default function Home() {
             <div className='col-span-1'>
               <List />
             </div>
-            <div>
+            <div className='mt-12'>
               <Pie />
             </div>
           </div>
